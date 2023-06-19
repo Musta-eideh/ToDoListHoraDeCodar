@@ -1,6 +1,9 @@
 import { useState } from 'react'
 
 
+import './app.css'; 
+
+
 function App() {
 
   // Colocar os dados vamos utilizar setTodos
