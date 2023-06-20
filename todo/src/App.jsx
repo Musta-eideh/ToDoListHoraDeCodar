@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
+import Todo from './components/Todo';
+import TodoForm from './components/TodoForm';
 
 import './app.css'; 
 
@@ -35,19 +37,12 @@ function App() {
       <div className="todo-list">
         {/* Exibindo todos os Todo com map*/}
         {todos.map((todo) => (
-          <div className="todo">
-            <div className="content">
-              {/* Imprimindo o conteudo que está no objeto todo(linha 35) */}
-              <p>{todo.text}</p>
-              <p>({todo.category})</p>
-            </div>
-            <div>
-              <button>Completar</button>
-              <button>x</button>
-            </div>
-          </div>
+          // Componente precisa funcionar passando a prop 'todo' presente na pasta Todo.jsx
+          // Logo se utiliza a propriedade todo que passa um objeto
+          <Todo todo={todo}/>
         ))}
       </div>
+      <TodoForm />
     </div>
   )
 }
