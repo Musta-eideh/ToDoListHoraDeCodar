@@ -31,6 +31,18 @@ function App() {
     },
   ]);
 
+  const addTodo = (text, category) => {
+      const newTodos = [...todos,{
+        id: Math.floor(Math.random() * 10000),
+        text,
+        category, 
+        isCompleted: false,
+      },
+    ];
+
+    setTodos(newTodos);
+  };
+
   return (
     <div className="app">
       <h1>Lista de Tarefas</h1>
@@ -39,10 +51,10 @@ function App() {
         {todos.map((todo) => (
           // Componente precisa funcionar passando a prop 'todo' presente na pasta Todo.jsx
           // Logo se utiliza a propriedade todo que passa um objeto
-          <Todo todo={todo}/>
+          <Todo key={todo.id} todo={todo}/>
         ))}
       </div>
-      <TodoForm />
+      <TodoForm addTodo={addTodo}/>
     </div>
   )
 }
