@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Todo from './components/Todo';
 import TodoForm from './components/TodoForm';
 import Search from './components/Search';
+import Filter from './components/Filter';
 
 import './app.css'; 
 
@@ -32,6 +33,9 @@ function App() {
   ]);
 
   const [search,setSearch] = useState("");
+
+  const [filter, setFilter] = useState("All");
+  const [sort, setSort] = useState("Asc");
 
   const addTodo = (text, category) => {
       const newTodos = [...todos,{
@@ -64,9 +68,15 @@ function App() {
     <div className="app">
       <h1>Lista de Tarefas</h1>
       <Search  search={search} setSearch={setSearch}/>
+      <Filter filter={filter} setFilter={setFilter} />
       <div className="todo-list">
         {/* Exibindo todos os Todo com map*/}
-        {todos.filter((todo) => todo.text.toLowerCase().includes(search.toLowerCase())).map((todo) => (
+        {todos
+        .filter((todo) => filter === "All" ? true : filter === "Completed" ? todo.isCompleted : !todo.isCompleted)
+        .filter((todo) => 
+          todo.text.toLowerCase().includes(search.toLowerCase())
+        )
+        .map((todo) => (
           // Componente precisa funcionar passando a prop 'todo' presente na pasta Todo.jsx
           // Logo se utiliza a propriedade todo que passa um objeto
           <Todo key={todo.id} todo={todo} removeTodo={removeTodo} completeTodo={completeTodo}/>
